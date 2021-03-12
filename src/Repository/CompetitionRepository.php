@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Competition;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Competition|null find($id, $lockMode = null, $lockVersion = null)
@@ -22,26 +22,26 @@ class CompetitionRepository extends ServiceEntityRepository
     /**
      * @return Competition[]
      */
-    public function  findLatest():array {
+    public function  findLatest(): array
+    {
         return $this->createQueryBuilder('c')
             ->orderBy('c.id', 'DESC')
             ->setMaxResults(16)
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
 
     /**
      * @return Competition[]
      */
-    public function  findJudo():array {
+    public function  findJudo(): array
+    {
         return $this->createQueryBuilder('c')
-            ->where('c.discipline' )
+            ->where('c.discipline')
             ->orderBy('c.id', 'DESC')
             ->setMaxResults(6)
             ->getQuery()
-            ->getResult()
-            ;
+            ->getResult();
     }
     // /**
     //  * @return Competition[] Returns an array of Competition objects
