@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une competition{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="card-content">
+                    <h1 class="card-title">Edit Competition</h1>
+                    {{ include('competition/_form.html.twig', {'button_label': 'Update'}) }}
+                </div>
+                <a href="{{ path('competition_index') }}">back to list</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var discipline = document.querySelectorAll("#competition_discipline")
+            var instances = M.FormSelect.init(discipline, {});
+
+            var entraineur = document.querySelectorAll("#competition_entraineur")
+            var instances = M.FormSelect.init(entraineur, {});
+
+            var date = document.querySelectorAll(".datepicker")
+            var instances = M.Datepicker.init(date, {});
+
+            var discipline = document.querySelectorAll("#competition_discipline")
+            var instances = M.FormSelect.init(discipline, {});
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>{% block title %}Acceuil{% endblock %}</title>
+</head>
+<nav class="blue darken-2">
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">DOUALA UNIVERSITY CLUB </a>
+        <ul id="nav-mobile" class=" right hide-on-med-and-down">
+            {% if app.user %}
+                <li><a href="{{ path('admin_index') }}">DASHBORD</a></li>
+            {% endif %}
+            <li><a href="{{ path('home') }}">ACCEUIL</a></li>
+            <li><a href="{{ path('athlete_liste') }}">ATHLETES</a></li>
+            <li><a href="{{ path('liste') }}">COMPETITIONS</a></li>
+            <li><a href="{{ path('entraineur_publique') }}">ENTRAINEURS</a></li>
+            <li><a href="{{ path('discpline_public') }}">DISCIPLINE</a></li>
+            {% if app.user %}
+                <li><a href="{{ path('logout') }}"><i class="material-icons">power_setting_new</i></a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+{% block stylesheets %}
+
+{% endblock %}
+<body class="">
+
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script
+        src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

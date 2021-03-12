@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashbord{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6 l4">
+                <div class="card-panel red accent-3 white-text center">
+                    <i class="material-icons medium">person</i>
+                    <h4 class="center-align">{{ athletes | length }} athlète{% if athletes | length > 1  %}s{% endif %}</h4>
+                </div>
+            </div>
+            <div class="col s12 m6 l4">
+                <div class="card-panel orange lighten-1 white-text center">
+                    <i class="material-icons medium">assignment_ind</i>
+                    <h4 class="center-align">{{ entraineurs | length }} Entraineurs</h4>
+                </div>
+            </div>
+            <div class="col s12 m6 l4">
+                <div class="card-panel teal accent-4 white-text center">
+                    <i class="material-icons medium">fitness_center</i>
+                    <h4 class="count">{{ disciplines | length }} Disciplines</h4>
+                </div>
+            </div>
+            <div class="col s12 m6 l4">
+                <div class="card-panel teal darken-3 white-text center">
+                    <i class="material-icons medium">event</i>
+                    <h4 class="count">{{ competitions | length }} Competitions</h4>
+                </div>
+            </div>
+            <div class="col s12 m6 l4">
+                <div class="card-panel pink darken-3 white-text center">
+                    <i class="material-icons medium">insert_comment</i>
+                    <h4 class="count">{{ commentaires | length }} Commentaires</h4>
+                </div>
+            </div>
+            <div class="col s12 m6 l4">
+                <div class="card-panel deep-purple lighten-1 white-text center">
+                    <i class="material-icons medium">account_circle</i>
+                    <h4 class="count">30 administrateurs</h4>
+                </div>
+            </div>
+            <div class="col s12 m6 l4">
+                <div class="card-panel green accent-4 white-text center">
+                    <i class="material-icons medium">supervisor_account</i>
+                    <h4 class="">592 Visiteurs</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="section blue lighten-4">
+        <div class="row">
+            <div class="col s12 m6 l6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Compétitions Recentes</span>
+                        <table class="striped responsive-table">
+                            <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Title</th>
+                                <th>Discipline</th>
+                                <th>Publié</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for competition in competitions %}
+                                <tr>
+                                    <td>{{ competition.id }}</td>
+                                    <td>{{ competition.titre }}</td>
+                                    <td>{{ competition.discipline.sport }}</td>
+                                    <td>{{ competition.datePublication | date('d-m-Y') }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col s12 m6 l6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Inscriptions Recentes</span>
+                        <table class="striped responsive-table">
+                            <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>Sexe</th>
+                                <th>Discipline</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for athlete in athletes %}
+                                <tr>
+                                    <td>{{ athlete.id }}</td>
+                                    <td>{{ athlete.nom }}</td>
+                                    <td>{{ athlete.prenom }}</td>
+                                    <td>{{ athlete.sexe.nom }}</td>
+                                    <td>{{ athlete.discipline.sport }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

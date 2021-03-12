@@ -1,0 +1,143 @@
+{% extends 'basepublique.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ discipline.nom }}</span>
+                <table class="striped">
+                    <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ discipline.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Sport</th>
+                        <td>{{ discipline.sport }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ discipline.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Genre</th>
+                        <td>{{ discipline.genre }}</td>
+                    </tr>
+                    <tr>
+                        <th>Categorie</th>
+                        <td>{{ discipline.categorie }}</td>
+                    </tr>
+                    <tr>
+                        <th>Olympique</th>
+                        <td>{{ discipline.olympique ? 'Yes' : 'No' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Entraineurs</th>
+                        <td>{{ discipline.entraineurs | length }}</td>
+                    </tr>
+                    <tr>
+                        <th>AThletes</th>
+                        <td>{{ discipline.athletes | length }}</td>
+                    </tr>
+                    <tr>
+                        <th>Competitions</th>
+                        <td>{{ discipline.competitions | length }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <hr>
+        <div class="card">
+            <div class="card-content">
+               <span class="card-title">Les Entraineurs</span>
+                <table class="striped">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Sexe</th>
+                        <th>Date_naissance</th>
+                        <th>Lieu_naissance</th>
+                        <th>Taille</th>
+                        <th>Poids</th>
+                        <th>Poste</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entraineur in discipline.entraineurs %}
+                        <tr>
+                            <td>{{ entraineur.id }}</td>
+                            <td>{{ entraineur.nom }}</td>
+                            <td>{{ entraineur.prenom }}</td>
+                            <td>{{ entraineur.sexe.nom }}</td>
+                            <td>{{ entraineur.dateNaissance ? entraineur.dateNaissance|date('Y-m-d') : '' }}</td>
+                            <td>{{ entraineur.lieuNaissance }}</td>
+                            <td>{{ entraineur.taille }}</td>
+                            <td>{{ entraineur.poids }}</td>
+                            <td>{{ entraineur.poste.nom }}</td>
+
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr>
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Les Athletes</span>
+                <table class="striped">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Sexe</th>
+                        <th>Date_naissance</th>
+                        <th>Lieu_naissance</th>
+                        <th>Taille</th>
+                        <th>Poids</th>
+                        <th>Filiere</th>
+                        <th>Specialite</th>
+                        <th>Competitions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for athlete in discipline.athletes %}
+                        <tr>
+                            <td>{{ athlete.id }}</td>
+                            <td>{{ athlete.nom }}</td>
+                            <td>{{ athlete.prenom }}</td>
+                            <td>{{ athlete.sexe.nom }}</td>
+                            <td>{{ athlete.dateNaissance ? athlete.dateNaissance|date('Y-m-d') : '' }}</td>
+                            <td>{{ athlete.lieuNaissance }}</td>
+                            <td>{{ athlete.taille }}</td>
+                            <td>{{ athlete.poids }}</td>
+                            <td>{{ athlete.filiere }}</td>
+                            <td>{{ athlete.specialite }}</td>
+                            <td>{{ athlete.resultats | length }}</td>
+
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="10">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}
+    {{ discipline.nom }}
+{% endblock %}
+

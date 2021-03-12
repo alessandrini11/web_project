@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commmentaire index{% endblock %}
+
+{% block body %}
+    <h1>Commmentaire index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Contenu</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commmentaire in commmentaires %}
+            <tr>
+                <td>{{ commmentaire.id }}</td>
+                <td>{{ commmentaire.nom }}</td>
+                <td>{{ commmentaire.email }}</td>
+                <td>{{ commmentaire.contenu }}</td>
+                <td>
+                    <a href="{{ path('commmentaire_show', {'id': commmentaire.id}) }}">show</a>
+                    <a href="{{ path('commmentaire_edit', {'id': commmentaire.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('commmentaire_new') }}">Create new</a>
+{% endblock %}

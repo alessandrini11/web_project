@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Discipline index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="card">
+            <div class="card-content">
+                <a class="btn green" href="{{ path('discipline_new') }}"><i class="material-icons">add</i></a>
+                    <h1 class="card-title">Discipline index</h1>
+                    <table class="table responsive-table striped">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>Sport</th>
+                            <th>Description</th>
+                            <th>Genre</th>
+                            <th>Categorie</th>
+                            <th>Olympique</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for discipline in disciplines %}
+                            <tr>
+                                <td>{{ discipline.id }}</td>
+                                <td>{{ discipline.nom }}</td>
+                                <td>{{ discipline.sport }}</td>
+                                <td>{{ discipline.description }}</td>
+                                <td>{{ discipline.genre }}</td>
+                                <td>{{ discipline.categorie }}</td>
+                                <td>{{ discipline.olympique ? 'Yes' : 'No' }}</td>
+                                <td>
+                                    <a class="btn green" href="{{ path('discipline_showP', {'id': discipline.id}) }}"><i class="material-icons">visibility</i></a>
+                                    <a class="btn yellow" href="{{ path('discipline_edit', {'id': discipline.id}) }}"><i class="material-icons">mode_edit</i></a>
+                                    {{ include('discipline/_delete_form.html.twig') }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="8">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}

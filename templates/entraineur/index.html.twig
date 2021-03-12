@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entraineur index{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="card">
+            <div class="card-content">
+                <a class="btn green" href="{{ path('entraineur_new') }}"><i class="material-icons">add</i></a>
+                <h1 class="card-title">Liste des Entraineurs</h1>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Date_naissance</th>
+                        <th>Lieu_naissance</th>
+                        <th>Taille</th>
+                        <th>Poids</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entraineur in entraineurs %}
+                        <tr>
+                            <td>{{ entraineur.id }}</td>
+                            <td>{{ entraineur.nom }}</td>
+                            <td>{{ entraineur.prenom }}</td>
+                            <td>{{ entraineur.dateNaissance ? entraineur.dateNaissance|date('Y-m-d') : '' }}</td>
+                            <td>{{ entraineur.lieuNaissance }}</td>
+                            <td>{{ entraineur.taille }}</td>
+                            <td>{{ entraineur.poids }}</td>
+                            <td>
+                                <a class="btn green" href="{{ path('entraineur_show', {'id': entraineur.id}) }}"><i class="material-icons">visibility</i></a>
+                                <a class="btn yellow" href="{{ path('entraineur_edit', {'id': entraineur.id}) }}"><i class="material-icons">mode_edit</i></a>
+                                {{ include('entraineur/_delete_form.html.twig') }}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

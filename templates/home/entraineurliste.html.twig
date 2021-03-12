@@ -1,0 +1,57 @@
+{% extends 'basepublique.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="card-content">
+                    <h2 class="card-title">Liste des entraineurs</h2>
+                    <table class="table responsive-table striped">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Discipline</th>
+                            <th>Poste</th>
+                            <th>Date_naissance</th>
+                            <th>Lieu_naissance</th>
+                            <th>Taille</th>
+                            <th>Poids</th>
+                            <th>Sexe</th>
+                            <th>Competition</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for entraineur in entraineurs %}
+                            <tr>
+                                <td>{{ entraineur.id }}</td>
+                                <td>{{ entraineur.nom | upper }}</td>
+                                <td>{{ entraineur.prenom | upper }}</td>
+                                <td>{{ entraineur.discipline.sport }}</td>
+                                <td>{{ entraineur.poste.nom }}</td>
+                                <td>{{ entraineur.dateNaissance ? entraineur.dateNaissance|date('Y-m-d') : '' }}</td>
+                                <td>{{ entraineur.lieuNaissance }}</td>
+                                <td>{{ entraineur.taille }}</td>
+                                <td>{{ entraineur.poids }}</td>
+                                <td>{{ entraineur.sexe.nom }}</td>
+                                <td>{{ entraineur.competitions | length }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="8">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}
+Entraineur
+{% endblock %}
+

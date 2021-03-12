@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entraineur{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="card">
+            <div class="card-content">
+                <h1>{{ entraineur.nom }} {{ entraineur.prenom }}</h1>
+
+                <table class="striped">
+                    <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ entraineur.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Sexe</th>
+                        <td>{{ entraineur.sexe.nom }}</td>
+                    </tr>
+                    <tr>
+                        <th>Taille</th>
+                        <td>{{ entraineur.taille }}</td>
+                    </tr>
+                    <tr>
+                        <th>Poids</th>
+                        <td>{{ entraineur.poids }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date_naissance</th>
+                        <td>{{ entraineur.dateNaissance ? entraineur.dateNaissance|date('Y-m-d') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Lieu_naissance</th>
+                        <td>{{ entraineur.lieuNaissance }}</td>
+                    </tr>
+                    <tr>
+                        <th>Discipline</th>
+                        <td>{{ entraineur.discipline.sport }}</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <a href="{{ path('entraineur_index') }}">back to list</a>
+
+    <a href="{{ path('entraineur_edit', {'id': entraineur.id}) }}">edit</a>
+
+    {{ include('entraineur/_delete_form.html.twig') }}
+{% endblock %}

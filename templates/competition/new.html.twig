@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Competition{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="card-content">
+                    <h1 class="card-title">Ajouter une Competition</h1>
+                    {{ form_start(form) }}
+                        <div class="input-field">
+                            {{ form_row(form.discipline) }}
+                        </div>
+                    <div class="input-field">
+                        {{ form_row(form.titre) }}
+                    </div>
+                    <div class="input-field">
+                        {{ form_row(form.date_debut,{'attr':{'class':'datepicker'}}) }}
+                    </div>
+                    <div class="input-field">
+                        {{ form_row(form.date_fin,{'attr':{'class':'datepicker'}}) }}
+                    </div>
+                    <div class="input-field">
+                        {{ form_row(form.titre) }}
+                    </div>
+                    <div class="input-field">
+                        {{ form_row(form.lieu) }}
+                    </div>
+                    <div class="input-field">
+                        {{ form_row(form.description,{'attr':{'class':'materialize-textarea'}}) }}
+                    </div>
+                    <div class="input-field">
+                        {{ form_row(form.entraineur) }}
+                    </div>
+                    <div class="input-field">
+                        <button class="btn purple">Créer</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+                <a href="{{ path('competition_index') }}">back to list</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var discipline = document.querySelectorAll("#competition_discipline")
+            var instances = M.FormSelect.init(discipline, {});
+
+            var entraineur = document.querySelectorAll("#competition_entraineur")
+            var instances = M.FormSelect.init(entraineur, {});
+
+            var date = document.querySelectorAll(".datepicker")
+            var instances = M.Datepicker.init(date, {});
+
+            var discipline = document.querySelectorAll("#competition_discipline")
+            var instances = M.FormSelect.init(discipline, {});
+        });
+    </script>
+{% endblock %}

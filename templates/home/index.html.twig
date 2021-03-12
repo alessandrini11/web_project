@@ -1,0 +1,44 @@
+{% extends 'basepublique.html.twig' %}
+
+{% block title %}Acceuil{% endblock %}
+{% block stylesheets %}
+    <style>
+        .intro{
+            padding: 20px;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="intro row center-align">
+            <div class="mt-5 grey lighten-2">
+                <p class="intro">
+                    Le douala university club est composé de différentes discuplines, celles-ci participe à des diverses
+                    compétition au cours de l'année. Cest compétitions sont d'ordre national et unversitaires
+                </p>
+            </div>
+        </div>
+    </div>
+<section class="section">
+    <div class="container">
+        <h3>Les competition Récentes</h3>
+        <div class="row">
+            {% for competition in competitions %}
+            <div class="col s12 m4 l3">
+                    <div class="card">
+                        <div class="card-content">
+                        <span class="card-title"><a href="{{ path('show_public',{id:competition.id}) }}">{{ competition.titre | upper }}</a></span>
+
+                            {{ competition.description }}
+                        </div>
+                        <div class="card-action">
+                            <p><i class="material-icons">timer</i> {{ competition.datePublication | date }}</p>
+                        </div>
+                    </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

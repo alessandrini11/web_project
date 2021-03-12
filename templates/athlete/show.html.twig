@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Athlete{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-content">
+                        <h2>{{ athlete.fullName | upper }}</h2>
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ athlete.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Date_naissance</th>
+                                <td>{{ athlete.dateNaissance ? athlete.dateNaissance|date('Y-m-d') : '' }}</td>
+                            </tr>
+                            <tr>
+                                <th>Lieu_naissance</th>
+                                <td>{{ athlete.lieuNaissance }}</td>
+                            </tr>
+                            <tr>
+                                <th>Taille</th>
+                                <td>{{ athlete.taille }}</td>
+                            </tr>
+                            <tr>
+                                <th>Poids</th>
+                                <td>{{ athlete.poids }}</td>
+                            </tr>
+                            <tr>
+                                <th>Filiere</th>
+                                <td>{{ athlete.filiere }}</td>
+                            </tr>
+                            <tr>
+                                <th>Discipline</th>
+                                <td>{{ athlete.discipline.sport }}</td>
+                            </tr>
+                            <tr>
+                                <th>Specialite</th>
+                                <td>{{ athlete.specialite }}</td>
+                            </tr>
+                            <tr>
+                                <th>Competitions</th>
+                                <td>{{ athlete.resultats | length }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Competition</th>
+                                <th>Classement</th>
+                                <th>
+                                    {% if athlete.discipline.sport == "Judo" %}
+                                        Categorie
+                                    {% elseif athlete.discipline.sport == "Athletisme" %}
+                                        Spécialtité
+                                    {% else %}
+                                        Poste
+                                    {% endif %}
+                                </th>
+                                <th>Date de debut</th>
+                                <th>Date de fin</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for resultat in athlete.resultats %}
+                                <tr>
+                                    <td><a href="{{ path('competition_show',{id:resultat.competition.id}) }}">{{ resultat.competition.titre }}</a></td>
+                                    <td>{{ resultat.classement.nom }}</td>
+                                    <td>{{ resultat.description }}</td>
+                                    <td>{{ resultat.competition.dateDebut | date }}</td>
+                                    <td>{{ resultat.competition.dateFin | date}}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{{ path('athlete_index') }}">back to list</a>
+
+{% endblock %}

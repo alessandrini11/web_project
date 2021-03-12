@@ -1,0 +1,54 @@
+{% extends 'basepublique.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="card">
+            <div class="card-content">
+                <h1 class="card-title">Discipline index</h1>
+                <table class="table responsive-table striped">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Sport</th>
+                        <th>Description</th>
+                        <th>Genre</th>
+                        <th>Categorie</th>
+                        <th>Olympique</th>
+                        <th>Competition</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for discipline in disciplines %}
+                        <tr>
+                            <td>{{ discipline.id }}</td>
+                            <td>{{ discipline.nom }}</td>
+                            <td>{{ discipline.sport }}</td>
+                            <td>{{ discipline.description }}</td>
+                            <td>{{ discipline.genre }}</td>
+                            <td>{{ discipline.categorie }}</td>
+                            <td>{{ discipline.olympique ? 'Yes' : 'No' }}</td>
+                            <td>{{ discipline.competitions | length }}</td>
+                            <td>
+                                <a href="{{ path('discipline_showP', {'id': discipline.id}) }}">show</a>
+                                <a href="{{ path('discipline_edit', {'id': discipline.id}) }}">edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block title %}
+    Disciplines
+{% endblock %}
+

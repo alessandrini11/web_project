@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Athlete{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="card">
+            <div class="card-content">
+                <h1 class="card-title">Create new Athlete</h1>
+                {{ include('athlete/_form.html.twig') }}
+            </div>
+        </div>
+        <a href="{{ path('athlete_index') }}">back to list</a>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var sexe = document.querySelectorAll("#athlete_sexe")
+            var instances = M.FormSelect.init(sexe, {});
+
+            var ecole = document.querySelectorAll("#athlete_ecole")
+            var instances = M.FormSelect.init(ecole, {});
+
+            var discipline = document.querySelectorAll("#athlete_discipline")
+            var instances = M.FormSelect.init(discipline, {});
+
+
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Resultat index{% endblock %}
+
+{% block body %}
+    <h1>Resultat index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Sexe</th>
+                <th>Discipline</th>
+                <th>Description</th>
+                <th>Classement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for resultat in resultats %}
+            <tr>
+                <td>{{ resultat.id }}</td>
+                <td>{{ resultat.athlete.nom }}</td>
+                <td>{{ resultat.athlete.prenom }}</td>
+                <td>{{ resultat.athlete.sexe.nom }}</td>
+                <td>{{ resultat.athlete.discipline.sport }}</td>
+                <td>{{ resultat.description }}</td>
+                <td>{{ resultat.classement.nom }}</td>
+                <td>
+                    <a href="{{ path('resultat_show', {'id': resultat.id}) }}">show</a>
+                    <a href="{{ path('resultat_edit', {'id': resultat.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('resultat_new') }}">Create new</a>
+{% endblock %}

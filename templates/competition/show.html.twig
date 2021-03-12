@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ competition.titre }}{% endblock %}
+
+{% block body %}
+    <section class="section section-detail">
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <div class=card>
+                        <div class="card-content">
+                            <h2>{{ competition.discipline.sport }}</h2>
+                            <h2 class="">{{ competition.titre }}</h2>
+                            <h4>du {{ competition.dateDebut | date('Y-m-d') }} au {{ competition.dateFin | date('Y-m-d') }} à {{ competition.lieu }}</h4>
+                            <p>Publié le :{{ competition.datePublication | date }}</p>
+                            <h6>Entraineur : {{ competition.entraineur.nom | upper }} {{ competition.entraineur.prenom }} || Makale Edimo</h6>
+                            {{ competition.description }}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="card">
+                        <div class="card-content">
+                            <h1 class="card-title">Les Resultats</h1>
+                            <table class="striped">
+                                <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Sexe</th>
+                                    <th>Categorie</th>
+                                    <th>Résultat</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for resultat in competition.resultats %}
+                                    <tr>
+                                        <td><a href="{{ path('athlete_public',{id:resultat.athlete.id}) }}">{{ resultat.athlete.fullName | upper }}</a></td>
+                                        <td>{{ resultat.athlete.sexe.nom }}</td>
+                                        <td>{{ resultat.description }}</td>
+                                        <td>{{ resultat.classement.nom }}</td>
+                                    </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="col s12">
+                    <div>
+                        <div class="card">
+                            <div class="card-content">
+                                <ul class="collection with-header">
+                                    <li class="collection-header">
+                                        <h5 class="card-title">Commentaires</h5>
+                                    </li>
+                                    {% for commentaire in competition.commmentaires %}
+                                        <li class="collection-item">
+                                            <span class="title">{{ commentaire.nom }}</span>
+                                            <p class="truncate">{{ commentaire.contenu }}</p>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h5 class="card-title">Ajouter un Resultat</h5>
+                            <div class="formResult">
+                                {{ include('resultat/_form.html.twig') }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div>
+
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var athlete = document.querySelectorAll("#resultat_athlete")
+            var instances = M.FormSelect.init(athlete, {});
+
+            var classement = document.querySelectorAll("#resultat_classement")
+            var instances = M.FormSelect.init(classement, {});
+
+            var date = document.querySelectorAll(".datepicker")
+            var instances = M.Datepicker.init(date, {});
+
+            var discipline = document.querySelectorAll("#competition_discipline")
+            var instances = M.FormSelect.init(discipline, {});
+        });
+    </script>
+{% endblock %}

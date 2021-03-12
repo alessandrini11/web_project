@@ -1,0 +1,52 @@
+{% extends 'basepublique.html.twig' %}
+{% block title 'Liste des athletes' %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="card-content">
+                    <h2 class="card-title">Liste des athletes</h2>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Sexe</th>
+                            <th>Date_naissance</th>
+                            <th>Lieu_naissance</th>
+                            <th>Taille(cm)</th>
+                            <th>Poids(Kg)</th>
+                            <th>Ecole</th>
+                            <th>Filiere</th>
+                            <th>Specialite</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for athlete in athletes %}
+                            <tr>
+                                <td>{{ athlete.id }}</td>
+                                <td><a href="{{ path('athlete_public',{id:athlete.id}) }}">{{ athlete.nom | upper }}</a></td>
+                                <td><a href="{{ path('athlete_public',{id:athlete.id}) }}">{{ athlete.prenom | upper }}</a></td>
+                                <td>{{ athlete.sexe.nom }}</td>
+                                <td>{{ athlete.dateNaissance ? athlete.dateNaissance|date('Y-m-d') : '' }}</td>
+                                <td>{{ athlete.lieuNaissance }}</td>
+                                <td>{{ athlete.taille }}</td>
+                                <td>{{ athlete.poids }}</td>
+                                <td>{{ athlete.ecole.nom }}</td>
+                                <td>{{ athlete.filiere }}</td>
+                                <td>{{ athlete.specialite }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="10">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

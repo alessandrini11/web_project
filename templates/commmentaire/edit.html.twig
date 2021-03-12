@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Commmentaire{% endblock %}
+
+{% block body %}
+    <h1>Edit Commmentaire</h1>
+
+    {{ include('commmentaire/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('commmentaire_index') }}">back to list</a>
+
+    {{ include('commmentaire/_delete_form.html.twig') }}
+{% endblock %}
